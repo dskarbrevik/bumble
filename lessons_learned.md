@@ -24,3 +24,18 @@ the first iteration hunting DXF/STEP/kicad_pcb references for the device family
 and parsing them for anchor dimensions.
 
 *Taught by: LOG 4→6 (2026-07-10 → 2026-07-12).*
+
+## Scaffold by component, not by artifact type
+
+The template's type-based directories (`cad/`, `design/`, `renders/`, `bom/`)
+scattered one component's files across the tree — the plate's CAD source, STL
+outputs, and renders lived in three places. The human asked for grouping by
+*what is being built*: `components/<name>/` (layout, plate, pcb, case,
+firmware), each owning its source, scratch outputs, and `renders/`. Alongside
+it, `parts/bom.json` (versioned) holds what is *bought*, and a root
+`bundle.json` logs which component versions + BOM version form each release —
+built vs bought becomes the top-level axis, and the release manifest is data
+(JSON) instead of prose. Candidate change to fablab's default layout and
+CLAUDE.md at next release review.
+
+*Taught by: LOG 13 (2026-07-12).*

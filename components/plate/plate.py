@@ -1,19 +1,20 @@
-"""bumble switch plate — parametric, driven by design/layout.py placed().
+"""bumble switch plate — parametric, driven by components/layout/layout.py placed().
 
 Outline: convex hull of each half's key corners, offset outward by the plate
 margin, unioned (the halves' offset hulls overlap at the apex), filleted.
 One square cutout per switch, rotated with its zone. Exports STL + PNG render.
 
-Usage: uv run python cad/plate.py --iter N
-Outputs: cad/plate_iter{N}.stl, renders/plate_iter{N}.png (gitignored scratch)
+Usage: uv run python components/plate/plate.py --iter N
+Outputs: components/plate/plate_iter{N}.stl,
+         components/plate/renders/plate_iter{N}.png (gitignored scratch)
 """
 
 import argparse
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "design"))
+HERE = Path(__file__).resolve().parent
+sys.path.insert(0, str(HERE.parent / "layout"))
 import layout  # noqa: E402
 
 from build123d import Polygon, extrude, fillet, offset, export_stl, Kind  # noqa: E402
@@ -94,7 +95,7 @@ def main():
     print(f"{n} cutouts; plate {bb.size.X:.1f} x {bb.size.Y:.1f} mm, "
           f"{layout.PLATE_THICK_MM} mm thick")
 
-    stl = ROOT / "cad" / f"plate_iter{args.iter}.stl"
+    stl = HERE / f"plate_iter{args.iter}.stl"
     export_stl(plate, str(stl))
     print(f"wrote {stl}")
 
@@ -111,7 +112,7 @@ def main():
     pl.subplot(1, 0)
     pl.add_mesh(mesh, color="#b9c2cc", show_edges=False)
     pl.view_isometric()
-    out = ROOT / "renders" / f"plate_iter{args.iter}.png"
+    out = HERE / "renders" / f"plate_iter{args.iter}.png"
     out.parent.mkdir(parents=True, exist_ok=True)
     pl.screenshot(str(out))
     print(f"wrote {out}")

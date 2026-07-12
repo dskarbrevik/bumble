@@ -8,11 +8,11 @@ secrets/*
 .env
 
 # Scratch design artifacts — regenerable from source; only promoted versions in a
-# confirmed/ dir are committed
+# confirmed/ dir are committed. renders/ dirs live inside each component.
 *_iter*
-renders/*
-!renders/confirmed/
-!renders/confirmed/**
+**/renders/*
+!**/renders/confirmed/
+!**/renders/confirmed/**
 
 # COTS models with redistribution-restricted licenses (e.g. SnapEDA CC BY-SA) — the
 # ledger row in models/ledger.md is committed, the file is not (part-models skill).

@@ -41,7 +41,8 @@ acceptance test written — one physical sentence checkable in under a minute.
     co-processor. Wired-QMK fallback would trade wireless for Quantum Painter.
     Screen part choice sets the real gap/envelope requirement.
 - [ ] Look-and-feel converged: human signs off on a layout render
-      (`design/layout.py` → `scripts/render_layout.py` → `renders/`)
+      (`components/layout/layout.py` → `scripts/render_layout.py` →
+      `components/layout/renders/`)
 - [x] Binding acceptance test (draft, post-assembly only per human): plugged in over
       USB, each of the 60 keys registers its legend once in a key tester
 - [x] Toolchain chosen: fablab defaults (build123d, Zener, KiCad, FreeRouting) —
@@ -58,7 +59,7 @@ its geometry via the `part-models` waterfall before asking the human to measure 
 try (1) datasheet dims, (2) an existing CAD model, and only then (3) calipers. Verify
 every found model against one fit-critical datasheet dimension; record it in
 `models/ledger.md` (source, trust tier, license, verified). No ledger row = no ground
-truth. Net-new parts (enclosure, brackets) are designed in `cad/`, not sourced here.
+truth. Net-new parts (enclosure, brackets) are designed in `components/`, not sourced here.
 
 **Exit:** every dimension/capture the design depends on exists, with provenance stated;
 every COTS part has a verified `models/ledger.md` row.
@@ -77,8 +78,8 @@ draft BOM complete; no "will this part even work?" unknowns.
 - ~~Hello-world firmware on target MCU~~ human decision: no pre-fab testing;
   keyboards are well-trodden design space, risk accepted
 - ~~Riskiest subsystem proven in isolation~~ same
-- [ ] Component survey + draft BOM (MPN, dims, stock, price) — kept: paper-only,
-      no hardware to buy; folds into Phase 3
+- [ ] Component survey + draft BOM in `parts/bom.json` (MPN, dims, stock,
+      price) — kept: paper-only, no hardware to buy; folds into Phase 3
 - ~~Buy-vs-build decided per subsystem~~ trivially decided: custom PCB ×2 (MX,
   Choc), COTS switches/caps/MCU
 

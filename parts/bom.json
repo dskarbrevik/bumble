@@ -1,0 +1,97 @@
+{
+  "version": "0.1.0",
+  "updated": "2026-07-12",
+  "parts": [
+    {
+      "id": "switch-mx",
+      "name": "MX-style mechanical switch (soldered, no hotswap)",
+      "category": "switch",
+      "qty": 60,
+      "mpn": null,
+      "manufacturer": null,
+      "source": null,
+      "price_usd": null,
+      "status": "candidate",
+      "used_by": ["plate", "pcb"],
+      "notes": "Specific switch undecided; MX variant. Choc variant gets its own BOM minor bump."
+    },
+    {
+      "id": "keycap-set",
+      "name": "Keycap set covering the 60-key Alice layout",
+      "category": "keycap",
+      "qty": 1,
+      "mpn": null,
+      "manufacturer": null,
+      "source": null,
+      "price_usd": null,
+      "status": "candidate",
+      "used_by": ["plate"],
+      "notes": "Needs Alice kit: 2.25u + 2.75u spacebars, 1.25u bottom mods, mirrored B."
+    },
+    {
+      "id": "stab-pcb-2u",
+      "name": "PCB-mount stabilizer, 2u class",
+      "category": "stab",
+      "qty": 6,
+      "mpn": null,
+      "manufacturer": null,
+      "source": null,
+      "price_usd": null,
+      "status": "candidate",
+      "used_by": ["plate", "pcb"],
+      "notes": "Bksp 2u, Enter 2.25u, Shifts 2.25/2.75u, spacebars 2.25/2.75u — all take 2u-class wire."
+    },
+    {
+      "id": "diode-row",
+      "name": "Matrix diode 1N4148W (SOD-123)",
+      "category": "electronic",
+      "qty": 60,
+      "mpn": "1N4148W",
+      "manufacturer": null,
+      "source": null,
+      "price_usd": null,
+      "status": "candidate",
+      "used_by": ["pcb"],
+      "notes": "One per key; standard choice, pending schematic."
+    },
+    {
+      "id": "mcu-wireless",
+      "name": "Wireless MCU module (candidate: nRF52840)",
+      "category": "electronic",
+      "qty": 1,
+      "mpn": null,
+      "manufacturer": null,
+      "source": null,
+      "price_usd": null,
+      "status": "candidate",
+      "used_by": ["pcb"],
+      "notes": "Blocked on ROADMAP Phase 0 feature-architecture decision (BLE-only vs dongle-also; ZMK color-display tension)."
+    },
+    {
+      "id": "display-center",
+      "name": "Center color display (candidates: ST7789 240x280 1.69\", GC9A01 round 240x240)",
+      "category": "electronic",
+      "qty": 1,
+      "mpn": null,
+      "manufacturer": null,
+      "source": null,
+      "price_usd": null,
+      "status": "candidate",
+      "used_by": ["pcb", "case"],
+      "notes": "Part choice sets the real center-bay size and layout SPLIT_EXTRA. Blocked on Phase 0."
+    },
+    {
+      "id": "battery-lipo",
+      "name": "LiPo battery + charging path",
+      "category": "electronic",
+      "qty": 1,
+      "mpn": null,
+      "manufacturer": null,
+      "source": null,
+      "price_usd": null,
+      "status": "candidate",
+      "used_by": ["pcb", "case"],
+      "notes": "Size TBD after case envelope; only needed if wireless decision sticks."
+    }
+  ]
+}

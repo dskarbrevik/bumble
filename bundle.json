@@ -1,0 +1,4 @@
+{
+  "description": "Append-only log of release bundles: which component versions and BOM version go together to form one deliverable package / GitHub release. Newest entry last. Schema per entry: bundle (device semver, matches the gh release tag device-v{X.Y.Z}), date, components (component-name -> version/tag, e.g. plate confirmed version, pcb-v tag, firmware commit), bom (parts/bom.json version), release (GitHub release URL once published), notes.",
+  "bundles": []
+}

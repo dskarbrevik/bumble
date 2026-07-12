@@ -19,6 +19,21 @@ Entry schema — omit empty fields, keep entries short:
 
 ---
 
+## 13 — 2026-07-12 — rescaffold: components/ + parts/bom.json + bundle.json
+**Phase:** 0
+**Did:** Human: regroup the repo by what's being built, not by artifact type.
+`design/` + `cad/` + `renders/` dissolved into `components/{layout,plate}/`
+(pcb, case, firmware join on first use), each component owning its source,
+scratch outputs, and renders/. New `parts/bom.json` (versioned; schema in
+parts/README.md) seeded with 7 candidate line items = the buy list; new root
+`bundle.json` = append-only log pairing component versions + BOM version per
+release (replaces the planned releases/ manifest.md). CLAUDE.md Layout/Releases,
+README, ROADMAP, .gitignore (`**/renders/*`), and both script paths updated;
+lesson recorded for fablab upstreaming.
+**Observed:** layout_iter13 + plate_iter13 regenerate identically (60 keys,
+335.6 x 125.7 mm) — pure restructure, no geometry change.
+**Decision:** continue.
+
 ## 12 — 2026-07-12 — fresh git history
 **Phase:** 0
 **Did:** Human: restart the repo without the accumulated history. Old repo

@@ -25,21 +25,28 @@ logged didn't happen — the next session can't see it.
 Every artifact type has a home — never park files at repo root.
 
 ```
-design/      design-intent definitions (key layout, geometry params) consumed by scripts/
-firmware/    source, one dir per program
-cad/         parametric CAD source for parts WE design; outputs per Versioning below
+components/  one subdir per thing WE design and build; each holds its source,
+             scratch outputs, and its own renders/ (gitignored; renders/confirmed/
+             is committed):
+  layout/      shared key-placement geometry (layout.py) — consumed by plate, pcb, case
+  plate/       switch plate CAD
+  pcb/         schematic + layout; fab exports in components/pcb/fab/
+  case/        enclosure CAD
+  firmware/    firmware source, one dir per program
+parts/       what we BUY to assemble the device: bom.json (versioned — see
+             parts/README.md for schema) + README
+bundle.json  append-only log pairing component versions + BOM version into each
+             deliverable package / GitHub release (see Releases)
 models/      fetched geometry for BOUGHT (COTS) parts + models/ledger.md (provenance);
              license-restricted files gitignored, ledger row still committed (part-models skill)
-pcb/         schematic + layout; fab exports in pcb/fab/
-bom/         one BOM per confirmed board revision
 datasheets/  component PDFs
-scripts/     repeatable tools — delete one-shots when done, or label [SUPERSEDED]
-renders/     generated views (gitignored; renders/confirmed/ is committed)
-releases/    complete build packages (see Releases)
+scripts/     repeatable cross-component tools — delete one-shots when done, or label [SUPERSEDED]
 secrets/     personal captures & credentials (gitignored)
 ```
 
-Create directories on first use; don't pre-create empty ones.
+Create directories on first use; don't pre-create empty ones. Built vs bought is
+the axis: if we design it, it lives in `components/<name>/`; if we purchase it,
+it's a `parts/bom.json` line item (with geometry in `models/` when needed).
 
 ## Versioning
 
@@ -64,10 +71,12 @@ One scheme for every artifact type — no ad-hoc suffixes or pet names.
 
 ## Releases
 
-A release is the complete package needed to build the device at a point in time:
-`releases/v{X.Y.Z}/` containing `manifest.md` (pinned versions of every artifact —
-CAD, PCB tag, BOM, firmware commit), `assembly.md`, and the fab-ready exports.
-Mirror it as a GitHub release: tag `device-v{X.Y.Z}`, exports attached as assets.
+A release is the complete package needed to build the device at a point in time.
+The manifest is an entry appended to `bundle.json`: pinned versions of every
+component (plate confirmed version, `pcb-v` tag, firmware commit), the
+`parts/bom.json` version, date, and notes. Mirror it as a GitHub release: tag
+`device-v{X.Y.Z}` (matching the bundle field), with assembly notes and the
+fab-ready exports attached as assets; write the release URL back into the entry.
 
 The agent never cuts a release on its own — it **proposes** one whenever a buildable
 snapshot exists that money or physical work is about to be spent against: a fab order
