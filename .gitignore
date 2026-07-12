@@ -1,0 +1,33 @@
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Secrets — personal captures & credentials, never committed (see secrets/README.md)
+secrets/*
+!secrets/README.md
+.env
+
+# Scratch design artifacts — regenerable from source; only promoted versions in a
+# confirmed/ dir are committed
+*_iter*
+renders/*
+!renders/confirmed/
+!renders/confirmed/**
+
+# COTS models with redistribution-restricted licenses (e.g. SnapEDA CC BY-SA) — the
+# ledger row in models/ledger.md is committed, the file is not (part-models skill).
+# Also the transient landing zone for human-fetched, not-yet-verified downloads.
+models/restricted/
+models/incoming/
+
+# Build & tool outputs
+build/
+__pycache__/
+.venv/
+tools/
+*.o
+*.elf
+*.hex
+*.bin
+*.log
+*.rpt
