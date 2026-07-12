@@ -1,4 +1,4 @@
-"""Render components/layout/layout.py to components/layout/renders/layout_iter{N}.png.
+"""Render design/layout.py to design/renders/layout_iter{N}.png.
 
 Usage: uv run python scripts/render_layout.py --iter N
 Keeps only the latest 10 iter renders (CLAUDE.md versioning rule).
@@ -16,7 +16,7 @@ from matplotlib.patches import FancyBboxPatch
 from matplotlib.transforms import Affine2D
 
 ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT / "components" / "layout"))
+sys.path.insert(0, str(ROOT / "design"))
 import layout  # noqa: E402
 
 KEY_FACE, MOD_FACE, SPACE_FACE = "#f2f2f0", "#dddddb", "#cdd6e0"
@@ -59,7 +59,7 @@ def main():
     ax.axis("off")
 
     out = (Path(args.out) if args.out
-           else ROOT / "components" / "layout" / "renders" / f"layout_iter{args.iter}.png")
+           else ROOT / "design" / "renders" / f"layout_iter{args.iter}.png")
     out.parent.mkdir(parents=True, exist_ok=True)
     fig.savefig(out, dpi=170, bbox_inches="tight", facecolor=BG)
     print(f"wrote {out} ({len(keys)} keys)")

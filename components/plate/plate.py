@@ -1,4 +1,4 @@
-"""bumble switch plate — parametric, driven by components/layout/layout.py placed().
+"""bumble switch plate — parametric, driven by design/layout.py placed().
 
 Outline: convex hull of each half's key corners, offset outward by the plate
 margin, unioned (the halves' offset hulls overlap at the apex), filleted.
@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-sys.path.insert(0, str(HERE.parent / "layout"))
+sys.path.insert(0, str(HERE.parent.parent / "design"))
 import layout  # noqa: E402
 
 from build123d import Polygon, extrude, fillet, offset, export_stl, Kind  # noqa: E402

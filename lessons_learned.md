@@ -27,15 +27,18 @@ and parsing them for anchor dimensions.
 
 ## Scaffold by component, not by artifact type
 
-The template's type-based directories (`cad/`, `design/`, `renders/`, `bom/`)
-scattered one component's files across the tree — the plate's CAD source, STL
-outputs, and renders lived in three places. The human asked for grouping by
-*what is being built*: `components/<name>/` (layout, plate, pcb, case,
-firmware), each owning its source, scratch outputs, and `renders/`. Alongside
-it, `parts/bom.json` (versioned) holds what is *bought*, and a root
-`bundle.json` logs which component versions + BOM version form each release —
-built vs bought becomes the top-level axis, and the release manifest is data
-(JSON) instead of prose. Candidate change to fablab's default layout and
-CLAUDE.md at next release review.
+The template's type-based directories (`cad/`, `renders/`, `bom/`) scattered
+one component's files across the tree — the plate's CAD source, STL outputs,
+and renders lived in three places. The human asked for grouping by *what is
+being built*: `components/<name>/` (plate, pcb, case, firmware), each owning
+its source, scratch outputs, and `renders/`. Refinement one iteration later:
+only an *actual part of the finished device* earns a `components/` subdir —
+cross-cutting design intent and idea exploration (the key layout, whole-device
+renders) stay in a top-level `design/`. Alongside these, `parts/bom.json`
+(versioned) holds what is *bought*, and a root `bundle.json` logs which
+component versions + BOM version form each release — built vs bought becomes
+the top-level axis, and the release manifest is data (JSON) instead of prose.
+Candidate change to fablab's default layout and CLAUDE.md at next release
+review.
 
-*Taught by: LOG 13 (2026-07-12).*
+*Taught by: LOG 13–14 (2026-07-12).*

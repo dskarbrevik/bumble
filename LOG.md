@@ -19,6 +19,19 @@ Entry schema — omit empty fields, keep entries short:
 
 ---
 
+## 14 — 2026-07-12 — design/ restored: components/ is for actual parts only
+**Phase:** 0
+**Did:** Human: only actual components deserve a `components/` subdir; keep a
+top-level `design/` for whole-device intent and idea iteration. Moved
+components/layout/ back to design/ (layout.py + design/renders/ for layout and
+concept renders); components/ now holds only real parts (plate today; pcb,
+case, firmware on first use). CLAUDE.md Layout gains the second axis —
+component vs concept; README/ROADMAP paths and both scripts updated; LOG-13
+lesson amended with the refinement.
+**Observed:** layout_iter14 + plate_iter14 regenerate identically (60 keys,
+335.6 x 125.7 mm) — pure restructure, no geometry change.
+**Decision:** continue.
+
 ## 13 — 2026-07-12 — rescaffold: components/ + parts/bom.json + bundle.json
 **Phase:** 0
 **Did:** Human: regroup the repo by what's being built, not by artifact type.

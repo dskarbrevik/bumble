@@ -41,8 +41,7 @@ acceptance test written — one physical sentence checkable in under a minute.
     co-processor. Wired-QMK fallback would trade wireless for Quantum Painter.
     Screen part choice sets the real gap/envelope requirement.
 - [ ] Look-and-feel converged: human signs off on a layout render
-      (`components/layout/layout.py` → `scripts/render_layout.py` →
-      `components/layout/renders/`)
+      (`design/layout.py` → `scripts/render_layout.py` → `design/renders/`)
 - [x] Binding acceptance test (draft, post-assembly only per human): plugged in over
       USB, each of the 60 keys registers its legend once in a key tester
 - [x] Toolchain chosen: fablab defaults (build123d, Zener, KiCad, FreeRouting) —

@@ -25,10 +25,12 @@ logged didn't happen — the next session can't see it.
 Every artifact type has a home — never park files at repo root.
 
 ```
-components/  one subdir per thing WE design and build; each holds its source,
-             scratch outputs, and its own renders/ (gitignored; renders/confirmed/
-             is committed):
-  layout/      shared key-placement geometry (layout.py) — consumed by plate, pcb, case
+design/      whole-device design intent and idea iteration — anything not owned
+             by a single component: layout.py (key placement, consumed by plate/
+             pcb/case), concept explorations, full-device renders in design/renders/
+components/  one subdir per ACTUAL component — a physical or flashable part of
+             the finished device. Each holds its source, scratch outputs, and its
+             own renders/ (gitignored; renders/confirmed/ is committed):
   plate/       switch plate CAD
   pcb/         schematic + layout; fab exports in components/pcb/fab/
   case/        enclosure CAD
@@ -44,9 +46,11 @@ scripts/     repeatable cross-component tools — delete one-shots when done, or
 secrets/     personal captures & credentials (gitignored)
 ```
 
-Create directories on first use; don't pre-create empty ones. Built vs bought is
-the axis: if we design it, it lives in `components/<name>/`; if we purchase it,
-it's a `parts/bom.json` line item (with geometry in `models/` when needed).
+Create directories on first use; don't pre-create empty ones. The axes: designed
+vs bought — if we make it, it's in `components/<name>/`; if we purchase it, it's
+a `parts/bom.json` line item (geometry in `models/` when needed). And component
+vs concept — only an actual part of the finished device earns a `components/`
+subdir; cross-cutting or exploratory work stays in `design/`.
 
 ## Versioning
 

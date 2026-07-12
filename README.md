@@ -41,13 +41,13 @@ No F-row, no arrows, no nav cluster — those live on a layer.
 
 ## Status
 
-Phase 0 (Define) — layout converging (`components/layout/renders/layout_iter8`
-= first 60-key bumble). See `ROADMAP.md` for the live plan and `LOG.md` for
-history.
+Phase 0 (Define) — layout converging (`design/renders/layout_iter8` = first
+60-key bumble). See `ROADMAP.md` for the live plan and `LOG.md` for history.
 
-Repo shape: `components/` holds what we design and build (layout, plate, pcb,
-case, firmware — one subdir each), `parts/bom.json` is the versioned buy list,
-and `bundle.json` logs which component + BOM versions form each release.
+Repo shape: `design/` holds whole-device intent (key layout, concept renders),
+`components/` has one subdir per actual part we build (plate, pcb, case,
+firmware), `parts/bom.json` is the versioned buy list, and `bundle.json` logs
+which component + BOM versions form each release.
 
 ## Toolset
 
