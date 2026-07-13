@@ -58,6 +58,25 @@ wheels = [
 ]
 
 [[package]]
+name = "bumble"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "build123d" },
+    { name = "matplotlib" },
+    { name = "pyvista" },
+    { name = "trimesh" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "build123d" },
+    { name = "matplotlib", specifier = ">=3.11.0" },
+    { name = "pyvista" },
+    { name = "trimesh" },
+]
+
+[[package]]
 name = "cadquery-ocp-novtk"
 version = "7.9.3.1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -266,25 +285,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/60/8b/32f9823da46cde7df2087faa08cd98d01b908f8dcab982cdba9c84e85355/decorator-5.3.1.tar.gz", hash = "sha256:4cbcdd55a6efadb9dbea26b858f4fb3264567b52d69ca0d25b721b553f60ea82", size = 58084, upload-time = "2026-05-18T06:03:28.057Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/05/7f/798705f5296a58ca505d600456748d1be48078eac8a7050d8a98bc9edb89/decorator-5.3.1-py3-none-any.whl", hash = "sha256:f47fe6fdbd2edd623ecfe36875d37aba411624e2670dd395dddae1358689bb3c", size = 10365, upload-time = "2026-05-18T06:03:26.517Z" },
-]
-
-[[package]]
-name = "device"
-version = "0.0.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "build123d" },
-    { name = "matplotlib" },
-    { name = "pyvista" },
-    { name = "trimesh" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "build123d" },
-    { name = "matplotlib", specifier = ">=3.11.0" },
-    { name = "pyvista" },
-    { name = "trimesh" },
 ]
 
 [[package]]

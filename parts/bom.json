@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "updated": "2026-07-12",
   "parts": [
     {
@@ -65,7 +65,7 @@
       "price_usd": null,
       "status": "candidate",
       "used_by": ["pcb"],
-      "notes": "Blocked on ROADMAP Phase 0 feature-architecture decision (BLE-only vs dongle-also; ZMK color-display tension)."
+      "notes": "BLE-only first take decided 2026-07-12 (dongle later if wanted). nRF52840 stands; XIAO nRF52840 and nice!nano v2 both proven with ZMK color displays (prospector/YADS)."
     },
     {
       "id": "display-center",
@@ -78,7 +78,7 @@
       "price_usd": null,
       "status": "candidate",
       "used_by": ["pcb", "case"],
-      "notes": "Part choice sets the real center-bay size and layout SPLIT_EXTRA. Blocked on Phase 0."
+      "notes": "Shortlist (LOG 15): Waveshare 1.69in 240x280 ST7789V2 (module 31.5x39.0mm, front-runner), 1.47in 172x320 ST7789V3 (22.0x38.5mm), 1.28in round GC9A01 (37.5x40.4mm), 2.0in 320x240 ST7789V (35x58mm). Fit mockups design/renders/screenfit_*_iter15. Awaiting human pick."
     },
     {
       "id": "battery-lipo",

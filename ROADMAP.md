@@ -33,13 +33,16 @@ acceptance test written — one physical sentence checkable in under a minute.
 - [ ] Envelope / form-factor constraints — deferred by design: look-and-feel render
       loop runs first; constraints get written down when the shape converges
 - [ ] Feature architecture decided (blocks Phase 3 schematic):
-  - Wireless: BT and/or 2.4 GHz dongle; battery + charging + power switch.
-    Candidate: nRF52840 (ZMK). Decide BLE-only vs dongle-also.
-  - Center color screen (gif/image, typing stats, modifier presses) in the
-    spacebar gap (~51 mm wide). Known tension: ZMK displays are monochrome-first;
-    color+animation likely needs a custom ZMK display module or a display
-    co-processor. Wired-QMK fallback would trade wireless for Quantum Painter.
-    Screen part choice sets the real gap/envelope requirement.
+  - [x] Wireless: **BLE-only first take** (human, 2026-07-12); 2.4 GHz dongle can
+    be a later firmware/accessory addition. Candidate MCU: nRF52840.
+    Battery + charging + power switch still to spec in Phase 3.
+  - [ ] Center color screen: researched 2026-07-12 (LOG 15). ZMK tension
+    resolved in principle: prospector + YADS prove nRF52840 + ZMK/LVGL drives
+    ST7789 SPI in full color today (as dongles; bumble is unibody so the
+    screen rides the central — battery cost is the open question, mitigate
+    with idle timeout/dimming). Fit mockups in design/renders/screenfit_*_iter15:
+    front-runner 1.69" 240×280 ST7789V2 with +0.25u split and ~14 mm center
+    chin. Awaiting human pick of candidate + placement strategy.
 - [ ] Look-and-feel converged: human signs off on a layout render
       (`design/layout.py` → `scripts/render_layout.py` → `design/renders/`)
 - [x] Binding acceptance test (draft, post-assembly only per human): plugged in over

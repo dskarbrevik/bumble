@@ -19,7 +19,27 @@ Entry schema — omit empty fields, keep entries short:
 
 ---
 
-## 14 — 2026-07-12 — design/ restored: components/ is for actual parts only
+## 15 — 2026-07-12 — screen research + fit mockups; BLE-only decided
+**Phase:** 0
+**Did:** Human decided wireless = BLE-only first take (dongle maybe later).
+Researched color displays + ZMK feasibility (research agents blocked by session
+limit; done inline). Firmware: prospector and YADS (zmk-dongle-screen) both
+drive ST7789 SPI in full color from nRF52840 under ZMK/LVGL — the "ZMK is
+monochrome-only" fear is dead; open risk shifts to battery draw of backlight
+on a keyboard-mounted screen (mitigations: idle timeout, dimming, ambient
+sensor). Parts shortlist (Waveshare modules): 1.69" 240x280 ST7789V2
+31.5x39.0mm; 1.47" 172x320 22.0x38.5mm; 1.28" round GC9A01 37.5x40.4mm;
+2.0" 320x240 58x35mm. Added --screen/--split-extra ghost options to
+render_layout.py; measured the real center void (~11mm between Bs, ~30-38mm
+between spacebars — the old ~51mm guess was wrong); computed min SPLIT_EXTRA
+per candidate and rendered 5 mockups (screenfit_*_iter15).
+**Observed:** pure-widen placements need 0.60-1.46u extra split (board grows
+11-28mm) and push the screen up into the narrow wedge; a "+0.25u split + ~14mm
+center chin" variant keeps the board compact and seats the 1.69" between the
+spacebars — visually the strongest.
+**Decision:** recommend 1.69" ST7789V2 + chin strategy; escalate to human.
+**Open:** pick screen + placement (pure-widen vs chin); OK to carry backlight
+battery risk to Phase 3 power budget?
 **Phase:** 0
 **Did:** Human: only actual components deserve a `components/` subdir; keep a
 top-level `design/` for whole-device intent and idea iteration. Moved

@@ -27,8 +27,18 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--iter", type=int, required=True, help="LOG entry number N")
     ap.add_argument("--out", default=None)
+    ap.add_argument("--split-extra", type=float, default=None,
+                    help="override layout.SPLIT_EXTRA (u) for this render")
+    ap.add_argument("--screen", default=None,
+                    help="ghost a screen module: 'W_MM,H_MM,label' (module outline)")
+    ap.add_argument("--screen-active", default=None,
+                    help="active area 'W_MM,H_MM' or 'round,DIA_MM' inside the module")
+    ap.add_argument("--screen-bottom-mm", type=float, default=None,
+                    help="module bottom edge y in mm (default: 2mm above plate edge)")
     args = ap.parse_args()
 
+    if args.split_extra is not None:
+        layout.SPLIT_EXTRA = args.split_extra
     keys = layout.placed()
     fig, ax = plt.subplots(figsize=(14, 6))
     ax.set_facecolor(BG)
@@ -50,8 +60,43 @@ def main():
                     fontsize=11 if len(k["legend"]) == 1 else 8,
                     color=LEGEND, rotation=-k["angle"])
 
+    title_extra = ""
+    if args.screen:
+        w_mm, h_mm, label = args.screen.split(",", 2)
+        w, h = float(w_mm) / layout.UNIT_MM, float(h_mm) / layout.UNIT_MM
+        # centered between the spacebars' inner edges; bottom near the plate edge
+        lsp = next(k for k in keys if k["legend"] == "" and k["zone"] == "LI")
+        rsp = next(k for k in keys if k["legend"] == "" and k["zone"] == "RI")
+        xc = (max(x for x, _ in lsp["corners"]) +
+              min(x for x, _ in rsp["corners"])) / 2
+        plate_bot = max(y for k in keys for _, y in k["corners"]) \
+            + layout.PLATE_MARGIN_MM / layout.UNIT_MM
+        bot = (args.screen_bottom_mm / layout.UNIT_MM if args.screen_bottom_mm
+               else plate_bot - 2 / layout.UNIT_MM)
+        ax.add_patch(plt.Rectangle((xc - w / 2, bot - h), w, h, fill=False,
+                                   edgecolor="#c0392b", linewidth=1.4,
+                                   linestyle="--"))
+        if args.screen_active:
+            a = args.screen_active.split(",")
+            if a[0] == "round":
+                d = float(a[1]) / layout.UNIT_MM
+                ax.add_patch(plt.Circle((xc, bot - h / 2), d / 2, fill=True,
+                                        facecolor="#2c3e50", alpha=0.25,
+                                        edgecolor="#c0392b", linewidth=0.8))
+            else:
+                aw, ah = float(a[0]) / layout.UNIT_MM, float(a[1]) / layout.UNIT_MM
+                ax.add_patch(plt.Rectangle((xc - aw / 2, bot - h / 2 - ah / 2),
+                                           aw, ah, fill=True,
+                                           facecolor="#2c3e50", alpha=0.25,
+                                           edgecolor="#c0392b", linewidth=0.8))
+        ax.text(xc, bot - h - 0.12, label, ha="center", va="bottom",
+                fontsize=8, color="#c0392b")
+        title_extra = f" — screen {w_mm}x{h_mm}mm"
+        if bot > plate_bot:
+            title_extra += f" (chin +{(bot - plate_bot) * layout.UNIT_MM:.0f}mm)"
+
     ax.set_title(f"bumble — iter {args.iter} — {len(keys)} keys — "
-                 f"Alice geometry, split extra {layout.SPLIT_EXTRA:g}u",
+                 f"Alice geometry, split extra {layout.SPLIT_EXTRA:g}u{title_extra}",
                  fontsize=11, color=LEGEND)
     ax.autoscale()
     ax.set_aspect("equal")

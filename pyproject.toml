@@ -1,6 +1,6 @@
 [project]
-name = "device"  # rename at kickoff
-version = "0.0.0"
+name = "bumble"
+version = "0.1.0"
 requires-python = ">=3.12"
 dependencies = [
     "build123d",  # parametric CAD
