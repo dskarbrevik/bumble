@@ -19,7 +19,27 @@ Entry schema — omit empty fields, keep entries short:
 
 ---
 
-## 15 — 2026-07-12 — screen research + fit mockups; BLE-only decided
+## 16 — 2026-07-12 — owned 1.69" module found (lochord-dev); low-power display + battery answers
+**Phase:** 0
+**Did:** Human leans pure-widen and asked (a) is the 1.69" the lochord-dev
+screen, (b) e-ink/low-power options, (c) big LiPo under the PCB. (a) Yes —
+lochord-dev's hardware_data/st7789_display.yaml has CALIPER-VERIFIED dims of a
+module the human owns: same 1.69" 240x280 panel (active 27.97x32.63, glass
+30x37.5) on a generic 31x48 carrier, 8-pin header, 90 mA max draw — reusable
+ground truth for Phase 1. Rendered its pure-widen fit (needs 1.171u vs
+Waveshare carrier's 1.114u; taller carrier crowds the B keys more). Built
+screensweep_iter16 comparison sheet of all pure-widen options. (b) ZMK
+low-power displays are monochrome-only in practice (Sharp memory LCD =
+nice!view, e-ink = Corne-ish Zen); color+animation requires a backlit TFT —
+it's a pick-2 triangle: color/animation, low power, ZMK-off-the-shelf.
+(c) Big LiPo under PCB is the right mitigation: huge unibody footprint fits
+2000-5000 mAh easily; screen at 90 mA full-on = 22-55 h continuous on those
+packs, weeks with timeout/dimming; note stock module chargers (~100 mA) are
+too slow for big packs — our custom PCB should carry a 500 mA+ charger IC
+(Phase 3 schematic item).
+**Decision:** continue; screen pick still with human (pure-widen lineup
+delivered).
+**Open:** which panel/carrier; confirm big-LiPo + charger-IC direction.
 **Phase:** 0
 **Did:** Human decided wireless = BLE-only first take (dongle maybe later).
 Researched color displays + ZMK feasibility (research agents blocked by session
