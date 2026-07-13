@@ -17,30 +17,10 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE.parent.parent / "design"))
 import layout  # noqa: E402
 
-from build123d import Polygon, extrude, fillet, offset, export_stl, Kind  # noqa: E402
+from build123d import (Circle, Polygon, Pos, extrude, fillet, offset,  # noqa: E402
+                       export_stl, Kind)
 
 U = layout.UNIT_MM
-
-
-def hull(points):
-    """Monotone-chain convex hull, returns CCW points."""
-    pts = sorted(set(points))
-    if len(pts) < 3:
-        return pts
-
-    def half(seq):
-        out = []
-        for p in seq:
-            while len(out) >= 2 and (
-                (out[-1][0] - out[-2][0]) * (p[1] - out[-2][1])
-                - (out[-1][1] - out[-2][1]) * (p[0] - out[-2][0])
-            ) <= 0:
-                out.pop()
-            out.append(p)
-        return out
-
-    lower, upper = half(pts), half(reversed(pts))
-    return lower[:-1] + upper[:-1]
 
 
 def poly_mm(pts_u):
@@ -54,15 +34,8 @@ def main():
     args = ap.parse_args()
 
     keys = layout.placed()
-    left = [p for k in keys if k["zone"] in ("LO", "LI") for p in k["corners"]]
-    right = [p for k in keys if k["zone"] in ("RI", "RO") for p in k["corners"]]
-
-    # center bridge: spans the apex + spacebar gap (placeholder screen bay)
-    bridge = [p for k in keys if k["legend"] in ("5", "6", "7", "8", "")
-              for p in k["corners"]]
-
     outline = None
-    for pts in (hull(left), hull(right), hull(bridge)):
+    for pts in layout.footprint_hulls(keys):
         face = offset(poly_mm(pts), layout.PLATE_MARGIN_MM, kind=Kind.ARC)
         outline = face if outline is None else outline + face
 
@@ -87,6 +60,12 @@ def main():
                for x, y in base]
         h = poly_mm(pts)
         holes = h if holes is None else holes + h
+
+    # round screen pass-through on the apex centerline — the module lives in
+    # the case deck's pocket ABOVE the plate, so the plate opens fully to pass
+    # the carrier and its backside connector
+    sx, sy = layout.screen_center(keys)
+    holes += Pos(sx * U, -sy * U) * Circle(layout.SCREEN["plate_pass_dia_mm"] / 2)
 
     plate = extrude(outline - holes, amount=layout.PLATE_THICK_MM)
 

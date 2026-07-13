@@ -108,3 +108,7 @@ don't belong.
 - A found CAD model is not trusted geometry: a STEP that imports clean can still have
   the wrong dimensions. Verify every sourced COTS model against one datasheet
   dimension before the design leans on it (part-models skill).
+- build123d booleans fail SILENTLY when solids don't overlap. Two causes bitten:
+  extrude() ignores a face's Location (translate the solid after, not the face
+  before), and our y-flipped outlines have -Z normals so bare extrude() goes
+  DOWNWARD — always pass dir=(0,0,1) and assert volume changed after cuts.

@@ -19,6 +19,29 @@ Entry schema — omit empty fields, keep entries short:
 
 ---
 
+## 18 — 2026-07-13 — round screen baked in; case v1 (high-profile pebble, 6° wedge)
+**Phase:** 0
+**Did:** Human picked the round display + case with matching design language +
+a few degrees of tilt; AskUser answers: 6° tilt, flush deck (profile question
+unanswered -> went with recommended high-profile pebble). Baked into
+design/layout.py: SCREEN spec block + screen_center() + footprint_hulls()
+(hull logic moved from plate.py so plate and case share one outline source).
+First split bake at 0.85u collided in the case: a flush ring needs deck
+material for the module POCKET (37.5 carrier + walls), not just glass —
+re-solved min split for ring outer 40.6mm at 0.8mm cap clearance ->
+SPLIT_EXTRA 1.09u, cy 4.125u; plate now passes the module fully (38.5 hole).
+New components/case/case.py: solid look-and-feel shell — pebble outline
+(wall +3), per-half key wells, screen ring guarded from well cuts, module
+pocket w/ 0.8 lip, 6° wedge, flat desk cut, deck 14mm front / 28 back.
+Two silent-boolean bugs found (extrude ignores face Location; y-flipped faces
+extrude -Z) -> dir=(0,0,1) everywhere + volume assert; lesson in CLAUDE.md.
+**Observed:** case_iter18: wells read clean, ring sits between halves like a
+crown, bulging slightly into each well — looks deliberate. Deck-edge fillets
+fail (sharp rims) — cosmetic pass later. Footprint 362 x 134mm.
+**Decision:** continue; case v1 to human for direction sign-off.
+**Open:** case profile confirm (high-profile assumed); USB port position;
+interior (cavity/ledge/bosses) once PCB exists; deck fillet fix.
+
 ## 17 — 2026-07-12 — right B removed (59 keys); ghost centering bug fixed; round screen leads
 **Phase:** 0
 **Did:** Human: drop the mirrored right B. layout.py now 59 keys (docstring

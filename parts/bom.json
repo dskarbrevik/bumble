@@ -93,7 +93,7 @@
         "pcb",
         "case"
       ],
-      "notes": "Shortlist (LOG 15/17): 1.28in round GC9A01 glass-only through plate aperture (needs +0.85u split after right-B removal) vs 1.69in 240x280 ST7789 (+1.24u). Fit mockups design/renders/screenfit_*_iter17. Awaiting human pick."
+      "notes": "DECIDED (LOG 17/18): 1.28in round GC9A01 240x240, Waveshare round-carrier module, flush in the case deck ring. Split solved at 1.09u for ring outer 40.6mm + 0.8mm cap clearance; module pocket 38.2, deck aperture 34, plate pass 38.5. MPN/source on order pass."
     },
     {
       "id": "battery-lipo",

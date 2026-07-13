@@ -60,33 +60,30 @@ def main():
                     fontsize=11 if len(k["legend"]) == 1 else 8,
                     color=LEGEND, rotation=-k["angle"])
 
+    U = layout.UNIT_MM
     title_extra = ""
     if args.screen:
+        # exploratory ghost via CLI, centered on the board's optical centerline
+        # (the 6|7 apex gap — NOT the spacebar gap, which sits left of it)
         w_mm, h_mm, label = args.screen.split(",", 2)
-        w, h = float(w_mm) / layout.UNIT_MM, float(h_mm) / layout.UNIT_MM
-        # centered on the board's optical centerline — the apex gap between 6
-        # and 7 (NOT the spacebar gap, which sits left of it); bottom near the
-        # plate edge
-        k6 = next(k for k in keys if k["legend"] == "6")
-        k7 = next(k for k in keys if k["legend"] == "7")
-        xc = (max(x for x, _ in k6["corners"]) +
-              min(x for x, _ in k7["corners"])) / 2
+        w, h = float(w_mm) / U, float(h_mm) / U
+        xc, _ = layout.screen_center(keys)
         plate_bot = max(y for k in keys for _, y in k["corners"]) \
-            + layout.PLATE_MARGIN_MM / layout.UNIT_MM
-        bot = (args.screen_bottom_mm / layout.UNIT_MM if args.screen_bottom_mm
-               else plate_bot - 2 / layout.UNIT_MM)
+            + layout.PLATE_MARGIN_MM / U
+        bot = (args.screen_bottom_mm / U if args.screen_bottom_mm
+               else plate_bot - 2 / U)
         ax.add_patch(plt.Rectangle((xc - w / 2, bot - h), w, h, fill=False,
                                    edgecolor="#c0392b", linewidth=1.4,
                                    linestyle="--"))
         if args.screen_active:
             a = args.screen_active.split(",")
             if a[0] == "round":
-                d = float(a[1]) / layout.UNIT_MM
+                d = float(a[1]) / U
                 ax.add_patch(plt.Circle((xc, bot - h / 2), d / 2, fill=True,
                                         facecolor="#2c3e50", alpha=0.25,
                                         edgecolor="#c0392b", linewidth=0.8))
             else:
-                aw, ah = float(a[0]) / layout.UNIT_MM, float(a[1]) / layout.UNIT_MM
+                aw, ah = float(a[0]) / U, float(a[1]) / U
                 ax.add_patch(plt.Rectangle((xc - aw / 2, bot - h / 2 - ah / 2),
                                            aw, ah, fill=True,
                                            facecolor="#2c3e50", alpha=0.25,
@@ -95,7 +92,18 @@ def main():
                 fontsize=8, color="#c0392b")
         title_extra = f" — screen {w_mm}x{h_mm}mm"
         if bot > plate_bot:
-            title_extra += f" (chin +{(bot - plate_bot) * layout.UNIT_MM:.0f}mm)"
+            title_extra += f" (chin +{(bot - plate_bot) * U:.0f}mm)"
+    elif getattr(layout, "SCREEN", None):
+        # the design's baked-in screen: module circle dashed, active area solid
+        s = layout.SCREEN
+        xc, yc = layout.screen_center(keys)
+        ax.add_patch(plt.Circle((xc, yc), s["module_dia_mm"] / 2 / U,
+                                fill=False, edgecolor="#c0392b",
+                                linewidth=1.0, linestyle="--"))
+        ax.add_patch(plt.Circle((xc, yc), s["active_dia_mm"] / 2 / U,
+                                fill=True, facecolor="#2c3e50", alpha=0.25,
+                                edgecolor="#c0392b", linewidth=0.8))
+        title_extra = f" — round screen Ø{s['active_dia_mm']:g}mm"
 
     ax.set_title(f"bumble — iter {args.iter} — {len(keys)} keys — "
                  f"Alice geometry, split extra {layout.SPLIT_EXTRA:g}u{title_extra}",

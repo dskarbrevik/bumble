@@ -22,8 +22,26 @@ placed() is the single geometry source for the keycap render and the plate.
 
 import math
 
-SPLIT_EXTRA = 0.0        # u, extra apex gap on top of the reference spacing
+SPLIT_EXTRA = 1.09       # u, extra apex gap — sized for the round screen's
+                         # flush-deck RING (pocket + walls + 0.8mm cap
+                         # clearance), not just the glass; solved at LOG 18
 KEY_INSET = 0.04         # u, visual keycap gap in renders
+
+# Center screen — 1.28" round GC9A01 240x240 (Waveshare round-carrier module),
+# set flush into the case deck inside a circular ring; the module drops into a
+# pocket on the deck underside and the plate opens fully below it.
+# Center rides the board's optical centerline (the 6|7 apex gap) — use
+# screen_center(), don't hardcode, so it tracks SPLIT_EXTRA.
+SCREEN = dict(
+    cy_u=4.125,              # vertical center (u), fit-solved at LOG 18
+    active_dia_mm=32.4,      # visible pixels
+    aperture_dia_mm=34.0,    # deck opening (active + 1.6 lip over the glass)
+    module_dia_mm=37.5,      # round carrier PCB (40.4 incl. connector tab)
+    module_thick_mm=6.0,     # carrier + backside parts, excl. header pins
+    pocket_dia_mm=38.2,      # deck-underside pocket the module drops into
+    ring_outer_dia_mm=40.6,  # solid deck ring around the pocket (1.2 walls)
+    plate_pass_dia_mm=38.5,  # plate opening — module passes plate entirely
+)
 
 # Plate parameters (MX variant; Choc gets its own later)
 UNIT_MM = 19.05
@@ -101,6 +119,49 @@ def _rot(px, py, deg, x, y):
     dx, dy = x - px, y - py
     return (px + dx * math.cos(r) - dy * math.sin(r),
             py + dx * math.sin(r) + dy * math.cos(r))
+
+
+def hull(points):
+    """Monotone-chain convex hull, returns CCW points."""
+    pts = sorted(set(points))
+    if len(pts) < 3:
+        return pts
+
+    def half(seq):
+        out = []
+        for p in seq:
+            while len(out) >= 2 and (
+                (out[-1][0] - out[-2][0]) * (p[1] - out[-2][1])
+                - (out[-1][1] - out[-2][1]) * (p[0] - out[-2][0])
+            ) <= 0:
+                out.pop()
+            out.append(p)
+        return out
+
+    lower, upper = half(pts), half(reversed(pts))
+    return lower[:-1] + upper[:-1]
+
+
+def footprint_hulls(keys=None):
+    """The board footprint as three convex hulls (u, y-down): left half,
+    right half, and the center bridge spanning the apex + screen + spacebar
+    gap. Plate and case both build their outlines from these."""
+    keys = keys or placed()
+    left = [p for k in keys if k["zone"] in ("LO", "LI") for p in k["corners"]]
+    right = [p for k in keys if k["zone"] in ("RI", "RO") for p in k["corners"]]
+    bridge = [p for k in keys if k["legend"] in ("5", "6", "7", "8", "")
+              for p in k["corners"]]
+    return [hull(left), hull(right), hull(bridge)]
+
+
+def screen_center(keys=None):
+    """Screen center (u): x on the apex centerline between 6 and 7, y fixed."""
+    keys = keys or placed()
+    k6 = next(k for k in keys if k["legend"] == "6")
+    k7 = next(k for k in keys if k["legend"] == "7")
+    xc = (max(x for x, _ in k6["corners"]) +
+          min(x for x, _ in k7["corners"])) / 2
+    return xc, SCREEN["cy_u"]
 
 
 def placed():

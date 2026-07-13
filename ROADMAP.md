@@ -30,8 +30,10 @@ acceptance test written — one physical sentence checkable in under a minute.
 
 - [x] Device intent and core functions in README — sharpened 2026-07-12: compact,
       feature-rich Alice; project renamed wing60 → bumble
-- [ ] Envelope / form-factor constraints — deferred by design: look-and-feel render
-      loop runs first; constraints get written down when the shape converges
+- [ ] Envelope / form-factor constraints — converging: case v1 (LOG 18) fixes
+      high-profile pebble, 6° wedge, flush round screen ring; footprint
+      ~362 x 134 mm, deck 14 mm front / 28 mm back. Write down as constraints
+      once human signs off the case direction
 - [ ] Feature architecture decided (blocks Phase 3 schematic):
   - [x] Wireless: **BLE-only first take** (human, 2026-07-12); 2.4 GHz dongle can
     be a later firmware/accessory addition. Candidate MCU: nRF52840.
