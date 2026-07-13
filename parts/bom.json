@@ -1,23 +1,26 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "updated": "2026-07-12",
   "parts": [
     {
       "id": "switch-mx",
       "name": "MX-style mechanical switch (soldered, no hotswap)",
       "category": "switch",
-      "qty": 60,
+      "qty": 59,
       "mpn": null,
       "manufacturer": null,
       "source": null,
       "price_usd": null,
       "status": "candidate",
-      "used_by": ["plate", "pcb"],
+      "used_by": [
+        "plate",
+        "pcb"
+      ],
       "notes": "Specific switch undecided; MX variant. Choc variant gets its own BOM minor bump."
     },
     {
       "id": "keycap-set",
-      "name": "Keycap set covering the 60-key Alice layout",
+      "name": "Keycap set covering the 59-key Alice layout",
       "category": "keycap",
       "qty": 1,
       "mpn": null,
@@ -25,8 +28,10 @@
       "source": null,
       "price_usd": null,
       "status": "candidate",
-      "used_by": ["plate"],
-      "notes": "Needs Alice kit: 2.25u + 2.75u spacebars, 1.25u bottom mods, mirrored B."
+      "used_by": [
+        "plate"
+      ],
+      "notes": "Needs Alice kit: 2.25u + 2.75u spacebars, 1.25u bottom mods. (Mirrored B dropped at LOG 17.)"
     },
     {
       "id": "stab-pcb-2u",
@@ -38,20 +43,25 @@
       "source": null,
       "price_usd": null,
       "status": "candidate",
-      "used_by": ["plate", "pcb"],
-      "notes": "Bksp 2u, Enter 2.25u, Shifts 2.25/2.75u, spacebars 2.25/2.75u — all take 2u-class wire."
+      "used_by": [
+        "plate",
+        "pcb"
+      ],
+      "notes": "Bksp 2u, Enter 2.25u, Shifts 2.25/2.75u, spacebars 2.25/2.75u \u2014 all take 2u-class wire."
     },
     {
       "id": "diode-row",
       "name": "Matrix diode 1N4148W (SOD-123)",
       "category": "electronic",
-      "qty": 60,
+      "qty": 59,
       "mpn": "1N4148W",
       "manufacturer": null,
       "source": null,
       "price_usd": null,
       "status": "candidate",
-      "used_by": ["pcb"],
+      "used_by": [
+        "pcb"
+      ],
       "notes": "One per key; standard choice, pending schematic."
     },
     {
@@ -64,7 +74,9 @@
       "source": null,
       "price_usd": null,
       "status": "candidate",
-      "used_by": ["pcb"],
+      "used_by": [
+        "pcb"
+      ],
       "notes": "BLE-only first take decided 2026-07-12 (dongle later if wanted). nRF52840 stands; XIAO nRF52840 and nice!nano v2 both proven with ZMK color displays (prospector/YADS)."
     },
     {
@@ -77,8 +89,11 @@
       "source": null,
       "price_usd": null,
       "status": "candidate",
-      "used_by": ["pcb", "case"],
-      "notes": "Shortlist (LOG 15): Waveshare 1.69in 240x280 ST7789V2 (module 31.5x39.0mm, front-runner), 1.47in 172x320 ST7789V3 (22.0x38.5mm), 1.28in round GC9A01 (37.5x40.4mm), 2.0in 320x240 ST7789V (35x58mm). Fit mockups design/renders/screenfit_*_iter15. Awaiting human pick."
+      "used_by": [
+        "pcb",
+        "case"
+      ],
+      "notes": "Shortlist (LOG 15/17): 1.28in round GC9A01 glass-only through plate aperture (needs +0.85u split after right-B removal) vs 1.69in 240x280 ST7789 (+1.24u). Fit mockups design/renders/screenfit_*_iter17. Awaiting human pick."
     },
     {
       "id": "battery-lipo",
@@ -90,8 +105,11 @@
       "source": null,
       "price_usd": null,
       "status": "candidate",
-      "used_by": ["pcb", "case"],
-      "notes": "Size TBD after case envelope; only needed if wireless decision sticks."
+      "used_by": [
+        "pcb",
+        "case"
+      ],
+      "notes": "Wireless confirmed BLE-first: pack is in. Big unibody floor fits 2000-5000 mAh; size after case envelope. Custom PCB carries a 500 mA+ charger IC (stock module chargers too slow for big packs)."
     }
   ]
 }

@@ -19,7 +19,27 @@ Entry schema — omit empty fields, keep entries short:
 
 ---
 
-## 16 — 2026-07-12 — owned 1.69" module found (lochord-dev); low-power display + battery answers
+## 17 — 2026-07-12 — right B removed (59 keys); ghost centering bug fixed; round screen leads
+**Phase:** 0
+**Did:** Human: drop the mirrored right B. layout.py now 59 keys (docstring
+keeps the 1.48u-apex provenance note); README table/count, ROADMAP acceptance
+test, BOM v0.1.2 (switches/diodes 59), repo description updated. Fixed a ghost
+placement bug the human spotted in the iter-15/16 mockups: screens were
+centered between the SPACEBARS, which sits ~0.5u left of the board's optical
+centerline (the 6|7 apex gap) — that's why ghosts overlapped keys. Re-solved
+min split on the true centerline with the B gone: the void at the old B row
+opens 11mm -> 32mm, and the winners flip — round GC9A01 glass-only needs
++0.85u split (+16mm board) while the 1.69" rect needs MORE than before
+(+1.24u) because it now binds on the surviving left B. Rendered corrected
+mockups (screenfit_round_iter17, screenfit_169_iter17) + layout/plate iter17
+(59 cutouts, 335.6 x 125.7 mm unchanged).
+**Observed:** the circle nestles into the V riding the apex line — reads like
+a watch face, angle-neutral against both ±12° wedges; the rect is clean but
+reads as a phone slotted into the keyboard.
+**Decision:** recommend round GC9A01, glass-only through a circular plate
+aperture; escalate aesthetic call to human.
+**Open:** confirm round vs rect (or ask for a rotated-rect mockup); carrier-
+under-plate clearance vs switch bodies to verify in CAD once picked.
 **Phase:** 0
 **Did:** Human leans pure-widen and asked (a) is the 1.69" the lochord-dev
 screen, (b) e-ink/low-power options, (c) big LiPo under the PCB. (a) Yes —

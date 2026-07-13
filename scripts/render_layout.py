@@ -64,11 +64,13 @@ def main():
     if args.screen:
         w_mm, h_mm, label = args.screen.split(",", 2)
         w, h = float(w_mm) / layout.UNIT_MM, float(h_mm) / layout.UNIT_MM
-        # centered between the spacebars' inner edges; bottom near the plate edge
-        lsp = next(k for k in keys if k["legend"] == "" and k["zone"] == "LI")
-        rsp = next(k for k in keys if k["legend"] == "" and k["zone"] == "RI")
-        xc = (max(x for x, _ in lsp["corners"]) +
-              min(x for x, _ in rsp["corners"])) / 2
+        # centered on the board's optical centerline — the apex gap between 6
+        # and 7 (NOT the spacebar gap, which sits left of it); bottom near the
+        # plate edge
+        k6 = next(k for k in keys if k["legend"] == "6")
+        k7 = next(k for k in keys if k["legend"] == "7")
+        xc = (max(x for x, _ in k6["corners"]) +
+              min(x for x, _ in k7["corners"])) / 2
         plate_bot = max(y for k in keys for _, y in k["corners"]) \
             + layout.PLATE_MARGIN_MM / layout.UNIT_MM
         bot = (args.screen_bottom_mm / layout.UNIT_MM if args.screen_bottom_mm

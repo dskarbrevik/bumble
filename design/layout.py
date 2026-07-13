@@ -1,11 +1,12 @@
-"""bumble layout — 60 keys, Alice-style unibody split.
+"""bumble layout — 59 keys, Alice-style unibody split.
 
 Geometry follows classic Alice-family spacing, anchored to plate-verified
 reference boards (see LOG 5/6/9 for the measurement work): only the 4-column
 alpha wedges rotate (±12°); outer columns stay straight and shear outward
 ~4.1 mm per row; the keys hugging the wedge boundary (2, -, P) are raised
 slightly so the rotated corners clear; the spacebar row is dropped 1.5 mm;
-apex 6->7 spacing is 1.48u, which is what fits the mirrored B (key #60).
+apex 6->7 spacing is 1.48u (the classic mirrored-B spacing; the mirrored B
+itself was dropped at LOG 17 to open the center for the screen).
 Bottom row is bumble's own: corner mod pairs + 2.25|2.75 spacebars.
 
 KEYS below is the hand-editable source of truth for placement — edit it
@@ -85,7 +86,6 @@ KEYS = [
     ('C', 4.1532, 3.7898, 1.0, 12.0, 'LI'),
     ('V', 5.1314, 3.9977, 1.0, 12.0, 'LI'),
     ('N', 8.8350, 3.9977, 1.0, -12.0, 'RI'),
-    ('B', 7.8569, 4.2056, 1.0, -12.0, 'RI'),
     ('B', 6.1095, 4.2056, 1.0, 12.0, 'LI'),
     ('Ctrl', 0.1980, 4.4998, 1.25, -0.0, 'LO'),
     ('Cmd', 1.4480, 4.4998, 1.25, -0.0, 'LO'),

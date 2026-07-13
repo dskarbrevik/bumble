@@ -46,7 +46,7 @@ acceptance test written — one physical sentence checkable in under a minute.
 - [ ] Look-and-feel converged: human signs off on a layout render
       (`design/layout.py` → `scripts/render_layout.py` → `design/renders/`)
 - [x] Binding acceptance test (draft, post-assembly only per human): plugged in over
-      USB, each of the 60 keys registers its legend once in a key tester
+      USB, each of the 59 keys registers its legend once in a key tester
 - [x] Toolchain chosen: fablab defaults (build123d, Zener, KiCad, FreeRouting) —
       this project is the template's shakedown run
 

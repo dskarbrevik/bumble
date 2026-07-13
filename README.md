@@ -1,6 +1,6 @@
 # bumble
 
-A compact, feature-rich 60-key Alice-style unibody split keyboard with a
+A compact, feature-rich 59-key Alice-style unibody split keyboard with a
 wireless brain and a color screen at its heart.
 
 Built from the [fablab](https://github.com/dskarbrevik/fablab) template — this
@@ -14,14 +14,15 @@ LOG 5/6/9 for the measurement work), kept lean:
 - **No macro column** — no extra left-wing keys.
 - **Quiet bottom row** — two mods on each bottom corner (Ctrl Cmd … Alt Fn) and
   just the two spacebars in the middle; no thumb-cluster extras.
-- **Mirrored B** on the right half — the classic Alice touch, and key #60.
+- **No mirrored B** — the classic Alice duplicate B was dropped (LOG 17) to
+  open the center void for the screen; left B carries the key.
 
 | Row | Keys | Count |
 |---|---|---|
 | Number | `` ` `` 1–0 - = Backspace | 14 |
 | Top | Tab Q–P [ ] \ | 14 |
 | Home | Caps A–' Enter | 13 |
-| Bottom alpha | Shift Z–B **B**–/ Shift | 13 |
+| Bottom alpha | Shift Z–B N–/ Shift | 12 |
 | Modifier | Ctrl Cmd **Space \| Space** Alt Fn | 6 |
 
 No F-row, no arrows, no nav cluster — those live on a layer.
